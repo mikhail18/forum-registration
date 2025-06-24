@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Poetry Forum - Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input.error {
+            border-color: #e53e3e;
+            background: #fed7d7;
+        }
+
+        input.success {
+            border-color: #38a169;
+            background: #c6f6d5;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .success-message {
+            color: #38a169;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        .privacy-notice {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 16px;
+            margin-top: 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">BP</div>
+            <h1>Join Berlin Poetry Forum</h1>
+            <p class="subtitle">Connect with fellow poets and literary enthusiasts</p>
+        </div>
+
+        <form id="registrationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <div class="error-message" id="firstNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <div class="error-message" id="lastNameError"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="emailError"></div>
+                <div class="success-message" id="emailSuccess"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp Number *</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+49 123 456 7890" required>
+                <div class="error-message" id="whatsappError"></div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city" required>
+                    <div class="error-message" id="cityError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country *</label>
+                    <input type="text" id="country" name="country" required>
+                    <div class="error-message" id="countryError"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="loading" id="loading"></span>
+                <span id="btnText">Join the Forum</span>
+            </button>
+        </form>
+
+        <div class="privacy-notice">
+            <strong>Privacy Notice:</strong> Your information will be used solely for Berlin Poetry Forum activities and will not be shared with third parties.
+        </div>
+    </div>
+
+    <script>
+        class RegistrationForm {
+            constructor() {
+                this.form = document.getElementById('registrationForm');
+                this.loading = document.getElementById('loading');
+                this.btnText = document.getElementById('btnText');
+                this.submitBtn = this.form.querySelector('.submit-btn');
+                
+                this.validators = {
+                    firstName: this.validateName,
+                    lastName: this.validateName,
+                    email: this.validateEmail,
+                    whatsapp: this.validateWhatsApp,
+                    city: this.validateName,
+                    country: this.validateName
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+                
+                // Real-time validation
+                Object.keys(this.validators).forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    field.addEventListener('blur', () => this.validateField(fieldName));
+                    field.addEventListener('input', () => this.clearErrors(fieldName));
+                });
+            }
+
+            validateName(value) {
+                if (!value.trim()) return 'This field is required';
+                if (value.trim().length < 2) return 'Must be at least 2 characters';
+                if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(value)) return 'Only letters, spaces, hyphens and apostrophes allowed';
+                return null;
+            }
+
+            validateEmail(value) {
+                if (!value.trim()) return 'Email is required';
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) return 'Please enter a valid email address';
+                return null;
+            }
+
+            validateWhatsApp(value) {
+                if (!value.trim()) return 'WhatsApp number is required';
+                const phoneRegex = /^[\+]?[(]?[\+]?\d{1,4}[)]?[-\s\.]?\d{1,4}[-\s\.]?\d{1,4}[-\s\.]?\d{1,9}$/;
+                if (!phoneRegex.test(value.replace(/\s/g, ''))) return 'Please enter a valid phone number';
+                return null;
+            }
+
+            validateField(fieldName) {
+                const field = document.getElementById(fieldName);
+                const value = field.value;
+                const validator = this.validators[fieldName];
+                const error = validator.call(this, value);
+
+                this.displayFieldError(fieldName, error);
+                
+                if (error) {
+                    field.classList.add('error');
+                    field.classList.remove('success');
+                } else {
+                    field.classList.remove('error');
+                    field.classList.add('success');
+                    
+                    if (fieldName === 'email') {
+                        document.getElementById('emailSuccess').textContent = 'Email looks good!';
+                        document.getElementById('emailSuccess').style.display = 'block';
+                    }
+                }
+
+                return !error;
+            }
+
+            displayFieldError(fieldName, error) {
+                const errorElement = document.getElementById(fieldName + 'Error');
+                if (error) {
+                    errorElement.textContent = error;
+                    errorElement.style.display = 'block';
+                } else {
+                    errorElement.style.display = 'none';
+                }
+            }
+
+            clearErrors(fieldName) {
+                const field = document.getElementById(fieldName);
+                field.classList.remove('error');
+                document.getElementById(fieldName + 'Error').style.display = 'none';
+                
+                if (fieldName === 'email') {
+                    document.getElementById('emailSuccess').style.display = 'none';
+                }
+            }
+
+            validateForm() {
+                let isValid = true;
+                Object.keys(this.validators).forEach(fieldName => {
+                    if (!this.validateField(fieldName)) {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                if (!this.validateForm()) {
+                    this.showNotification('Please fix the errors before submitting', 'error');
+                    return;
+                }
+
+                this.setLoading(true);
+
+                try {
+                    const formData = new FormData(this.form);
+                    
+                    // Simulate API call (replace with actual endpoint)
+                    const response = await this.submitToServer(formData);
+                    
+                    if (response.success) {
+                        this.showNotification('Registration successful! Welcome to Berlin Poetry Forum!', 'success');
+                        this.form.reset();
+                        this.clearAllValidation();
+                    } else {
+                        throw new Error(response.message || 'Registration failed');
+                    }
+                } catch (error) {
+                    this.showNotification(error.message || 'Something went wrong. Please try again.', 'error');
+                } finally {
+                    this.setLoading(false);
+                }
+            }
+
+            async submitToServer(formData) {
+                try {
+                    const response = await fetch('register.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Server error occurred');
+                    }
+                    
+                    return data;
+                } catch (error) {
+                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                        throw new Error('Unable to connect to server. Please check your connection.');
+                    }
+                    throw error;
+                }
+            }
+
+            setLoading(isLoading) {
+                if (isLoading) {
+                    this.loading.style.display = 'inline-block';
+                    this.btnText.textContent = 'Registering...';
+                    this.submitBtn.disabled = true;
+                } else {
+                    this.loading.style.display = 'none';
+                    this.btnText.textContent = 'Join the Forum';
+                    this.submitBtn.disabled = false;
+                }
+            }
+
+            clearAllValidation() {
+                Object.keys(this.validators).forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    field.classList.remove('error', 'success');
+                    document.getElementById(fieldName + 'Error').style.display = 'none';
+                });
+                document.getElementById('emailSuccess').style.display = 'none';
+            }
+
+            showNotification(message, type) {
+                // Remove existing notifications
+                const existing = document.querySelector('.notification');
+                if (existing) existing.remove();
+
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => notification.classList.add('show'), 100);
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, 4000);
+            }
+        }
+
+        // Initialize the form when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new RegistrationForm();
+        });
+    </script>
+</body>
+</html>

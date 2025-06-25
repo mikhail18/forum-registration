@@ -1,0 +1,316 @@
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.language-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.flag-btn {
+    width: 40px;
+    height: 30px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.flag-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.flag-btn.active {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+}
+
+.flag-btn.ru {
+    background: url(../img/flag-ru.png);
+}
+
+.flag-btn.en {
+    background: url(../img/flag-us.png);
+    position: relative;
+}
+
+.flag-btn.en::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 53.8%;
+    background: #3c3b6e;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 136px;
+    background: url(../img/logo-forum.png);
+    border-radius: 8px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: #2d3748;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2d3748;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+input.error {
+    border-color: #e53e3e;
+    background: #fed7d7;
+}
+
+input.success {
+    border-color: #38a169;
+    background: #c6f6d5;
+}
+
+.error-message {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 6px;
+    display: none;
+}
+
+.success-message {
+    color: #38a169;
+    font-size: 12px;
+    margin-top: 6px;
+    display: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loading {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 500;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .language-switcher {
+        top: 15px;
+        right: 15px;
+    }
+
+    .flag-btn {
+        width: 35px;
+        height: 26px;
+    }
+}
+
+.privacy-notice {
+    background: #f7fafc;
+    border-left: 4px solid #667eea;
+    padding: 16px;
+    margin-top: 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.fade-transition {
+    transition: opacity 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+</style></head>

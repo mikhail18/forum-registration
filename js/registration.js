@@ -271,7 +271,7 @@ class RegistrationForm {
 
     async submitToServer(formData) {
         try {
-            const response = await fetch('register.php', {
+            const response = await fetch('register_json.php', {
                 method: 'POST',
                 body: formData
             });

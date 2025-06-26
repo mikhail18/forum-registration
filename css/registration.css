@@ -26,17 +26,6 @@ body {
     overflow: hidden;
 }
 
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-    animation: shimmer 3s ease-in-out infinite;
-}
-
 @keyframes shimmer {
 
     0%,
@@ -80,6 +69,7 @@ body {
 .flag-btn.active {
     transform: scale(1.15);
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+    cursor: initial;
 }
 
 .flag-btn.ru {
@@ -89,16 +79,6 @@ body {
 .flag-btn.en {
     background: url(../img/flag-us.png);
     position: relative;
-}
-
-.flag-btn.en::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 53.8%;
-    background: #3c3b6e;
 }
 
 .header {

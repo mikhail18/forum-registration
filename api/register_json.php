@@ -189,7 +189,7 @@ try {
     writeMembers($dataFile, $lockFile, $members);
 
     // Send confirmation email
-    require_once 'send_confirmation_email.php';
+    require_once 'email.php';
     sendConfirmationEmail($newMember);
 
     // Log successful registration

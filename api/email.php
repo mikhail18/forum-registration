@@ -3,7 +3,7 @@
 $emailConfig = [
     'smtp_host' => 'your-smtp-server.com',
     'smtp_port' => 587,
-    'smtp_username' => 'service@poezia.us',
+    'smtp_username' => 'add name',
     'smtp_password' => 'your-email-password',
     'from_email' => 'service@poezia.us',
     'from_name' => 'Berlin Poetry Forum'
@@ -87,7 +87,7 @@ function getEnglishEmailTemplate($fullName) {
     </head>
     <body>
         <div class="header">
-            <h1>🎭 Berlin Poetry Forum</h1>
+            <h1>📚 Berlin Poetry Forum</h1>
             <p>Where words come alive in the heart of Berlin</p>
         </div>
         
@@ -99,27 +99,18 @@ function getEnglishEmailTemplate($fullName) {
             <p>As a member of our vibrant poetry community, you will:</p>
             <ul>
                 <li>🎤 Participate in weekly poetry readings and open mic nights</li>
-                <li>📚 Join exclusive workshops with renowned poets</li>
                 <li>🤝 Connect with fellow poetry enthusiasts from around the world</li>
-                <li>📱 Receive updates about upcoming events via WhatsApp</li>
                 <li>🌟 Share your own poetry and receive constructive feedback</li>
             </ul>
-            
-            <p>Our next event is coming up soon! Keep an eye on your WhatsApp for event notifications and community updates.</p>
-            
-            <div style="text-align: center;">
-                <a href="#" class="button">Join Our WhatsApp Group</a>
-            </div>
-            
+
             <p>If you have any questions or need assistance, please don\'t hesitate to reach out to us.</p>
             
-            <p>Welcome to the family!</p>
             <p><strong>The Berlin Poetry Forum Team</strong></p>
         </div>
         
         <div class="footer">
             <p>© 2025 Berlin Poetry Forum | Berlin, Germany</p>
-            <p>You received this email because you registered for our poetry community.</p>
+            <p>You received this email because you registered for our poetry  forum.</p>
         </div>
     </body>
     </html>';
@@ -144,7 +135,7 @@ function getRussianEmailTemplate($fullName) {
     </head>
     <body>
         <div class="header">
-            <h1>🎭 Berlin Poetry Forum</h1>
+            <h1>📚 Berlin Poetry Forum</h1>
             <p>Где слова оживают в сердце Берлина</p>
         </div>
         
@@ -155,28 +146,19 @@ function getRussianEmailTemplate($fullName) {
             
             <p>Как член нашего яркого поэтического сообщества, вы сможете:</p>
             <ul>
-                <li>🎤 Участвовать в еженедельных поэтических чтениях и открытых микрофонах</li>
-                <li>📚 Посещать эксклюзивные мастер-классы с известными поэтами</li>
-                <li>🤝 Общаться с единомышленниками со всего мира</li>
-                <li>📱 Получать уведомления о предстоящих событиях через WhatsApp</li>
+                <li>🎤 Участвовать в ежедневных поэтических чтениях и открытых микрофонах</li>
+                 <li>🤝 Общаться с единомышленниками со всего мира</li>
                 <li>🌟 Делиться своими стихами и получать конструктивную обратную связь</li>
             </ul>
             
-            <p>Наше следующее мероприятие состоится совсем скоро! Следите за уведомлениями в WhatsApp о событиях и новостях сообщества.</p>
-            
-            <div style="text-align: center;">
-                <a href="#" class="button">Присоединиться к группе WhatsApp</a>
-            </div>
-            
             <p>Если у вас есть вопросы или вам нужна помощь, не стесняйтесь обращаться к нам.</p>
             
-            <p>Добро пожаловать в нашу семью!</p>
-            <p><strong>Команда Berlin Poetry Forum</strong></p>
+           <p><strong>Команда Berlin Poetry Forum</strong></p>
         </div>
         
         <div class="footer">
             <p>© 2025 Berlin Poetry Forum | Берлин, Германия</p>
-            <p>Вы получили это письмо, потому что зарегистрировались в нашем поэтическом сообществе.</p>
+            <p>Вы получили это письмо, потому что зарегистрировались для участия.</p>
         </div>
     </body>
     </html>';

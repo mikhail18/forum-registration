@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум "Солнечный ветер-2025 Берлин"</title>
+    <link rel="icon" type="image/png" href="./img/favicon-tr.png">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header></header>
+    <div class="container">
+        <div class="img-wrapper"><img id="home-btn" class="logo" src="img/logo-forum.png" alt="Логотип форума"></div>
+        <h1>Международный поэтический форум<br>«Солнечный ветер-2025. Берлин»</h1>
+        <p><strong>Форум пройдет с 9 по 13 октября 2025 года в городе Берлине (Германия).</strong></p>
+        <p>Приглашаются поэты и прозаики всего мира.</p>
+        <p><strong>Цель Форума:</strong> Международный поэтический форум в Берлине — это возможность собрать известных
+            поэтов, пишущих на русском языке, дабы поговорить о современном состоянии поэзии и, возможно, выработать
+            несколько совместных эстетических манифестов.</p>
+
+        <div class="info-box">
+            <p><strong>Взнос для участия: 250 ЕВРО</strong></p>
+            <p>Сюда входит проживание в двухместном номере отеля (4 ночи) и вступительный взнос.</p>
+            <p><strong>Регистрация открыта до 25 июля 2025 г.</strong></p>
+        </div>
+
+        <button class="button" id="register-btn">Зарегистрироваться</button>
+
+        <div class="sponsors">
+            <h2>Наши спонсоры</h2>
+            <div class="sponsor-logos">
+                <img class="sponsor-img" src="img/ugetra-logo-cr-tr.png" alt="UgetRa NFP">
+                <!-- Дополнительные лого можно добавить сюда -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('home-btn').addEventListener('click', function () {
+            window.location.href = 'https://poezia.us/allforums/';
+        });
+        document.getElementById('register-btn').addEventListener('click', function () {
+            window.location.href = 'registration.html';
+        });
+        document.querySelector('.sponsor-img').addEventListener('click', function () {
+            window.location.href = 'https://russianpoetry.org/';
+        });
+    </script>
+</body>
+
+</html>

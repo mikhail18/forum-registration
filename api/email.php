@@ -3,9 +3,9 @@
 $emailConfig = [
     'smtp_host' => 'your-smtp-server.com',
     'smtp_port' => 587,
-    'smtp_username' => 'your-email@domain.com',
+    'smtp_username' => 'service@poezia.us',
     'smtp_password' => 'your-email-password',
-    'from_email' => 'noreply@berlinpoetryforum.com',
+    'from_email' => 'service@poezia.us',
     'from_name' => 'Berlin Poetry Forum'
 ];
 

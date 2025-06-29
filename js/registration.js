@@ -1,4 +1,5 @@
 // Translation data
+const homeUrl = 'https://poezia.us/registration';
 const translations = {
     ru: {
         title: 'Присоединяйтесь к Берлинскому Поэтическому Форуму',
@@ -129,9 +130,6 @@ class RegistrationForm {
             document.title = lang === 'ru' ?
                 'Берлинский Поэтический Форум - Регистрация' :
                 'Berlin Poetry Forum - Registration';
-
-            // Update logo text
-            document.querySelector('.logo').textContent = lang === 'ru' ? 'БП' : 'BP';
 
             // Translate all elements
             document.querySelectorAll('[data-translate]').forEach(element => {
@@ -271,7 +269,7 @@ class RegistrationForm {
 
     async submitToServer(formData) {
         try {
-            const response = await fetch('register_json.php', {
+            const response = await fetch(`${homeUrl}/api/register_json.php`, {
                 method: 'POST',
                 body: formData
             });

@@ -154,7 +154,9 @@ class RegistrationForm {
     validateName(value) {
         if (!value.trim()) return this.t('nameRequired');
         if (value.trim().length < 2) return this.t('nameMinLength');
-        if (!/^[a-zA-ZÀ-ÿа-яА-Я\s'-]+$/.test(value)) return this.t('nameInvalidChars');
+        if (!/^[a-zA-ZÀ-ÿа-яА-Я\s'-]+$/.test(value)) {
+             return this.t('nameInvalidChars');
+        }
         return null;
     }
 

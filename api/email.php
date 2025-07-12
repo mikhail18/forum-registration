@@ -1,10 +1,6 @@
 <?php
 // Email configuration
 $emailConfig = [
-    'smtp_host' => 'your-smtp-server.com',
-    'smtp_port' => 587,
-    'smtp_username' => 'service@ugetra.org',
-    'smtp_password' => 'titanM!c3d4f6g5',
     'from_email' => 'service@ugetra.org',
     'from_name' => 'Berlin Poetry Forum'
 ];
@@ -162,49 +158,5 @@ function getRussianEmailTemplate($fullName) {
         </div>
     </body>
     </html>';
-}
-
-// Alternative function using PHPMailer (if you prefer SMTP)
-function sendConfirmationEmailSMTP($member) {
-    global $emailConfig;
-    
-    // Uncomment and use this if you have PHPMailer installed
-    /*
-    require_once 'vendor/autoload.php';
-    
-    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-    
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host       = $emailConfig['smtp_host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $emailConfig['smtp_username'];
-        $mail->Password   = $emailConfig['smtp_password'];
-        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = $emailConfig['smtp_port'];
-        $mail->CharSet    = 'UTF-8';
-        
-        // Recipients
-        $mail->setFrom($emailConfig['from_email'], $emailConfig['from_name']);
-        $mail->addAddress($member['email'], $member['first_name'] . ' ' . $member['last_name']);
-        
-        // Content
-        $emailContent = getEmailContent($member['language'], $member['first_name'], $member['last_name']);
-        $mail->isHTML(true);
-        $mail->Subject = $emailContent['subject'];
-        $mail->Body    = $emailContent['body'];
-        
-        $mail->send();
-        error_log("SMTP confirmation email sent successfully to: " . $member['email']);
-        return true;
-        
-    } catch (Exception $e) {
-        error_log("SMTP email sending error: {$mail->ErrorInfo}");
-        return false;
-    }
-    */
-    
-    return false; // Remove this when implementing PHPMailer
 }
 ?>

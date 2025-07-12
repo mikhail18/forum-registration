@@ -71,7 +71,8 @@ function validateName($name) {
     if (strlen(trim($name)) < 2) {
         return 'Name must be at least 2 characters';
     }
-    if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'-]+$/', $name)) {
+    // Updated regex to support Unicode letters
+    if (!preg_match('/^[\p{L}\s\'-]+$/u', $name)) {
         return 'Name contains invalid characters';
     }
     return null;
@@ -190,7 +191,10 @@ try {
 
     // Send confirmation email
     require_once 'email.php';
-    sendConfirmationEmail($newMember);
+    $emailSent = sendConfirmationEmail($newMember);
+    if (!$emailSent) {
+        error_log("Failed to send confirmation email to: $email");
+    }
 
     // Log successful registration
     error_log("New member registered: ID $memberId, Email: $email");

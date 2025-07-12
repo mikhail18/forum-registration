@@ -3,9 +3,9 @@
 $emailConfig = [
     'smtp_host' => 'your-smtp-server.com',
     'smtp_port' => 587,
-    'smtp_username' => 'add name',
-    'smtp_password' => 'your-email-password',
-    'from_email' => 'service@poezia.us',
+    'smtp_username' => 'service@ugetra.org',
+    'smtp_password' => 'titanM!c3d4f6g5',
+    'from_email' => 'service@ugetra.org',
     'from_name' => 'Berlin Poetry Forum'
 ];
 
